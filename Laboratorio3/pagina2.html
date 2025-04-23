@@ -60,6 +60,26 @@
       const raw2 = document.getElementById('arg2').value.trim();
       const op   = document.getElementById('operator').value;
       let resultado;
+
+      // Ayuda para parsear booleanos de "v", "f", "verdadero", "falso"
+      function parseBool(s) {
+        const l = s.toLowerCase();
+        if (l === 'v' || l === 'verdadero') return true;
+        if (l === 'f' || l === 'falso') return false;
+        return null;
+      }
+
+      // **Casos lógicos**: entrada como texto, salida "Verdadero"/"Falso"
+      if (op === '&&' || op === '||') {
+        const aBool = parseBool(raw1);
+        const bBool = parseBool(raw2);
+        if (aBool === null || bBool === null) {
+          resultado = '¡Entrada lógica inválida!';
+        } else {
+          const res = (op === '&&') ? (aBool && bBool) : (aBool || bBool);
+          resultado = res ? 'Verdadero' : 'Falso';
+        }
+      } 
     });
   </script>
 </body>
