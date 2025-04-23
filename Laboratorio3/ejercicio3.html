@@ -14,34 +14,32 @@
     <p id="demo"></p>
 
     <script>
-        var d = new Date();
-        var year = d.getFullYear();
 
         function chosenDay() {
+            const today = new Date();
+            const year = today.getFullYear();
+
             const dayAQP = 227;
-            const getDay = calculatorDay();
-            let lackDay = dayAQP - getDay;
+            let daysPassed = calculatorDay(today, year);
+            let lackDay = dayAQP - daysPassed;
+
             if( lackDay < 0) {
-                if(isBisiesto()) {
-                    lackDay = lackDay % 366;
-                }
-                else {
-                    lackDay = lackDay % 365;
-                }
+                //Ajustar para el año siguiente
+                const yearLength = isBisiesto(year) ? 366:365;
+                lackDay = ((lackDay % yearLength) + yearLength) % yearLength;
             }
             
             document.getElementById("demo").innerText =  lackDay + " dias";
         }
 
-        function calculatorDay() {
-            /*Cada vez que restamos dos fechas dos en milisegundos, debemos 
-            convertilo en días. 
-            Después lo redondeamos con el floor para que se pueda restar*/
-            const day = Math.floor((d - new Date(year,0,1))/1000/60/60/24);
+        function calculatorDay(date, year) {
+            /*Cada vez que restamos dos fechas dos en milisegundos, convertir en días. 
+            Después se rendondea con floor y se le suma uno para la fecha exacta*/
+            const day = Math.floor((date - new Date(year,0,1))/1000/60/60/24) + 1;
             return day;
         }
 
-        function isBisiesto() {
+        function isBisiesto(year) {
             return( (year % 4 === 0 && year % 100 != 0) || year % 400 === 0);
         }
     
