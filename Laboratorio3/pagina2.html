@@ -79,7 +79,45 @@
           const res = (op === '&&') ? (aBool && bBool) : (aBool || bBool);
           resultado = res ? 'Verdadero' : 'Falso';
         }
-      } 
+
+      } else {
+        // **Casos numéricos**: aritmética, bits, potencia y raíz
+        const a = Number(raw1);
+        const b = Number(raw2);
+
+        if (isNaN(a) || isNaN(b)) {
+          resultado = '¡Entrada numérica inválida!';
+        } else {
+          switch (op) {
+            // Aritméticas
+            case '+':  resultado = a + b;   break;
+            case '-':  resultado = a - b;   break;
+            case '*':  resultado = a * b;   break;
+            case '/':  resultado = b !== 0 ? a / b : '∞';   break;
+            case '%':  resultado = b !== 0 ? a % b : 'NaN'; break;
+
+            // Bit a bit
+            case '&':  resultado = a & b;   break;
+            case '|':  resultado = a | b;   break;
+            case '^':  resultado = a ^ b;   break;
+            case '<<': resultado = a << b;  break;
+            case '>>': resultado = a >> b;  break;
+
+            // Potencia y raíz
+            case 'pow':
+              resultado = Math.pow(a, b);
+              break;
+            case 'root':
+              // b-ésima raíz de a
+              resultado = Math.pow(a, 1 / b);
+              break;
+
+            default:
+              resultado = 'Operador desconocido';
+          }
+        }
+      }
+
     });
   </script>
 </body>
