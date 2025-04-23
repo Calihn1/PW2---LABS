@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ejercicio de los botones</title>
+    <style>
+      #demo {
+        font-size: 20px;
+        transition: color 0.3s, font-size 0.3s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p id="demo">HOLA A PROGRAMACIÓN WEB 2</p>
+
+    <button type="button" id="increaseWords">Increase Words</button>
+    <button type="button" id="decreaseWords">Decrease Words</button>
+
+    <script>
+      
+      const demo     = document.getElementById('demo');
+      const incBtn   = document.getElementById('increaseWords');
+      const decBtn   = document.getElementById('decreaseWords');
+      // obtenemos el tamaño actual en px (como número)
+      let fontSize   = parseInt(window.getComputedStyle(demo).fontSize, 10);
+
+    </script>
+  </body>
+</html>
