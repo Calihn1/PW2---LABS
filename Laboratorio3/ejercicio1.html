@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ejercicio fechas</title>
+  </head>
+
+  <body>
+
+    <label>Ingrese un numero del 0 al 6</label>
+    <input type="text" id="respuesta" name = "respuesta">
+
+    <button onclick="Date('respuesta')">Respuesta</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function Date(dia) {
+            d = new Date();
+            document.getElementById("demo").innerHTML = d.getDate(dia);
+        }
+        
+    </script>
+
+    
+  </body>
+    
+</html>
