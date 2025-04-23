@@ -30,7 +30,21 @@
                             .toString(16)
                             .padStart(6, '0');
         }
-        
+
+        // Event listener para aumentar
+        incBtn.addEventListener('click', () => {
+            fontSize += 2;                          // +2px
+            demo.style.fontSize = fontSize + 'px';
+            demo.style.color    = getRandomColor(); // color nuevo
+        });
+
+        // Event listener para disminuir
+        decBtn.addEventListener('click', () => {
+            fontSize = Math.max(2, fontSize - 2);   // evitar que sea <2px
+            demo.style.fontSize = fontSize + 'px';
+            demo.style.color    = getRandomColor(); // color nuevo
+        });
+
     </script>
   </body>
 </html>
