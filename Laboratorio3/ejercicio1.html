@@ -6,23 +6,27 @@
   </head>
 
   <body>
+    <label>Día de la semana</label>
 
-    <label>Ingrese un numero del 0 al 6</label>
-    <input type="text" id="respuesta" name = "respuesta">
-
-    <button onclick="Date('respuesta')">Respuesta</button>
+    <button onclick="seeDay()">Respuesta</button>
 
     <p id="demo"></p>
 
     <script>
-        function Date(dia) {
-            d = new Date();
-            document.getElementById("demo").innerHTML = d.getDate(dia);
-        }
-        
-    </script>
+        function getDate(d) {
+            const days = ["Domingo","Lunes", "Martes","Miercoles"
+            ,"Jueves","Viernes","Sabado"];
 
+            return days[d];
+        }
+
+        function seeDay() {
+            const day = new Date();
+            const name = getDate(day.getDay())
+            document.getElementById("demo").innerHTML = name;
+        }
     
+    </script>
   </body>
     
 </html>
