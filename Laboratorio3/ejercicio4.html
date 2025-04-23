@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ejercicio URL de meet</title>
+  </head>
+
+  <body>
+    <label>Ingrese el URL de la sesión de meet:</label>
+    <input  class = "text" id = "respuesta" name = "respuesta">
+
+    <button onclick="removeHyphens()"> Quitar guiones </button>
+
+    <p id="demo"></p>
+
+    <script>
+        function removeHyphens() {
+            let i;
+            let url = document.getElementById("respuesta").value;
+            //Apiclamos expresiones regulares para cambiar guión por nada
+            let newUrl = url.replace(/-/g,"");
+        
+            document.getElementById("demo").innerText = newUrl ;
+        }
+    
+    </script>
+  </body>
+    
+</html>
