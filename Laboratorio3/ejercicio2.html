@@ -15,11 +15,11 @@
 
     <script>
         function changeText() {
-            text = document.getElementById("respuesta");
-            text = text.split();
-            text = text.reverse();
-            text = text.join();
-            document.getElementById("demo").innerHTML = text;
+           const text = document.getElementById("respuesta").value;
+           
+           const reversed = text.split("").reverse().join("");
+        
+        document.getElementById("demo").innerText = reversed;
         }
     
     </script>
