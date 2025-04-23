@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ejercicio dia de Arequipa</title>
+  </head>
+
+  <body>
+    <label>Cantidad de tiempo para el aniversario de Arequipa:</label>
+    
+
+    <button onclick="chosenDay()">click</button>
+
+    <p id="demo"></p>
+
+    <script>
+    
+        function chosenDay() {
+            const dayAQP = 227;
+            const getDay = calculatorDay();
+            const lackDay = dayAQP - getDay;
+            document.getElementById("demo").innerText =  lackDay + " dias";
+
+            
+        }
+        function calculatorDay() {
+            let d = new Date();
+            const year = d.getFullYear();
+            /*Cada vez que restamos dos fechas dos en milisegundos, debemos 
+            convertilo en días. 
+            Después lo redondeamos con el floor para que se pueda restar*/
+            const day = Math.floor((d - new Date(year,0,1))/1000/60/60/24);
+            return day;
+        }
+    
+    </script>
+  </body>
+    
+</html>
