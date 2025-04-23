@@ -30,28 +30,46 @@
 
     //Usamos el EventListener con el botón
     formCantidad.addEventListener('submit', e => {
-      e.preventDefault();                // Evita recarga de página
-      resultadoElem.textContent = '';    // Limpia resultados previos
-      contenedor.innerHTML = '';         // Limpia tabla previa
+        e.preventDefault();                // Evita recarga de página
+        resultadoElem.textContent = '';    // Limpia resultados previos
+        contenedor.innerHTML = '';         // Limpia tabla previa
 
-      const n = parsejInt(document.getElementById('cantidad').value, 10);
+        const n = parseInt(document.getElementById('cantidad').value, 10);
       
-      //Creamos la tabla y las filas 
-      const tabla = document.createElement('table');
-      const fila  = document.createElement('tr');
+        //Creamos la tabla y las filas 
+        const tabla = document.createElement('table');
+        const fila  = document.createElement('tr');
 
-      for (let i = 0; i < n; i++) {
-        //Creamos las celdas
-        const celda = document.createElement('td');
-        // Valor aleatorio entre 1 y 100
-        const valor = Math.floor(Math.random() * 100) + 1;
-        // Colocamos los números dentro de cada celda
-        celda.textContent = valor;
-        fila.appendChild(celda);
-      }
-      //Colocamos todo dentro del contenedor para que se muestre
-      tabla.appendChild(fila);
-      contenedor.appendChild(tabla);
+        for (let i = 0; i < n; i++) {
+            //Creamos las celdas
+            const celda = document.createElement('td');
+            // Valor aleatorio entre 1 y 100
+            const valor = Math.floor(Math.random() * 100) + 1;
+            // Colocamos los números dentro de cada celda
+            celda.textContent = valor;
+            fila.appendChild(celda);
+        }
+        //Colocamos todo dentro del contenedor para que se muestre
+        tabla.appendChild(fila);
+        contenedor.appendChild(tabla);
+
+        //Creamos un boton
+        const btnSuma = document.createElement('button');
+        btnSuma.textContent = 'Calcular suma';
+        btnSuma.style.display = 'block';
+        btnSuma.style.marginTop = '1em';
+
+        btnSuma.addEventListener('click', () => {
+            let suma = 0;
+            //Suma usando forEach de todos los valores de las celdas
+            const celdas = tabla.querySelectorAll('td');
+            celdas.forEach( td => {
+                suma +=Number(td.textContent);
+            })
+            resultadoElem.textContent = `La suma de los ${n} valores es: ${suma}`;
+        });
+
+        contenedor.appendChild(btnSuma);
     });
   </script>
 </body>
