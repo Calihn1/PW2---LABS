@@ -14,23 +14,35 @@
     <p id="demo"></p>
 
     <script>
-    
+        var d = new Date();
+        var year = d.getFullYear();
+
         function chosenDay() {
             const dayAQP = 227;
             const getDay = calculatorDay();
-            const lackDay = dayAQP - getDay;
-            document.getElementById("demo").innerText =  lackDay + " dias";
-
+            let lackDay = dayAQP - getDay;
+            if( lackDay < 0) {
+                if(isBisiesto()) {
+                    lackDay = lackDay % 366;
+                }
+                else {
+                    lackDay = lackDay % 365;
+                }
+            }
             
+            document.getElementById("demo").innerText =  lackDay + " dias";
         }
+
         function calculatorDay() {
-            let d = new Date();
-            const year = d.getFullYear();
             /*Cada vez que restamos dos fechas dos en milisegundos, debemos 
             convertilo en días. 
             Después lo redondeamos con el floor para que se pueda restar*/
             const day = Math.floor((d - new Date(year,0,1))/1000/60/60/24);
             return day;
+        }
+
+        function isBisiesto() {
+            return( (year % 4 === 0 && year % 100 != 0) || year % 400 === 0);
         }
     
     </script>
