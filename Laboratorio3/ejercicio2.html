@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ejercicio sentido cambiado</title>
+  </head>
+
+  <body>
+    <label>Ingrese un texto:</label>
+    <input  class = "text" id = "respuesta" name = "respuesta">
+
+    <button onclick="changeText()">Texto Inverso</button>
+
+    <p id="demo"></p>
+
+    <script>
+        function changeText() {
+            text = document.getElementById("respuesta");
+            text = text.split();
+            text = text.reverse();
+            text = text.join();
+            document.getElementById("demo").innerHTML = text;
+        }
+    
+    </script>
+  </body>
+    
+</html>
