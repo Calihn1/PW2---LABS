@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Operaciones Dinámicas Avanzadas</title>
+  <style>
+    body { font-family: sans-serif; padding: 1em; }
+    label { display: inline-block; width: 120px; }
+    input, select { margin-bottom: 0.5em; }
+    #result { margin-top: 1em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Calculadora Dinámica</h1>
+
+  <div>
+    <label for="arg1">Argumento 1:</label>
+    <input type="text" id="arg1" placeholder="ej. 5 o verdadero">
+  </div>
+  <div>
+    <label for="arg2">Argumento 2:</label>
+    <input type="text" id="arg2" placeholder="ej. 3 o falso">
+  </div>
+
+  <div>
+    <label for="operator">Operador:</label>
+    <select id="operator">
+      <optgroup label="Aritméticas">
+        <option value="+">+ (Suma)</option>
+        <option value="-">− (Resta)</option>
+        <option value="*">× (Multiplicación)</option>
+        <option value="/">÷ (División)</option>
+        <option value="%">% (Módulo)</option>
+      </optgroup>
+      <optgroup label="Lógicas">
+        <option value="&&">&& (AND lógico)</option>
+        <option value="||">|| (OR lógico)</option>
+      </optgroup>
+      <optgroup label="Bit a bit">
+        <option value="&">& (AND bit)</option>
+        <option value="|">| (OR bit)</option>
+        <option value="^">^ (XOR bit)</option>
+        <option value="<<">« (Shift izq)</option>
+        <option value=">>">» (Shift der)</option>
+      </optgroup>
+      <optgroup label="Otras">
+        <option value="pow">pow (Potencia: a^b)</option>
+        <option value="root">root (Raíz: b-ésima de a)</option>
+      </optgroup>
+    </select>
+  </div>
+
+  <button id="btnCalc">Calcular</button>
+
+  <p id="result"></p>
+</body>
+</html>
+
