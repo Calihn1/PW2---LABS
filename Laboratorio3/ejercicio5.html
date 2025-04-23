@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabla Dinámica y Suma</title>
+  <style>
+    table { border-collapse: collapse; margin-top: 1em; }
+    td { border: 1px solid #666; padding: 0.5em 1em; text-align: center; }
+    #resultado { margin-top: 1em; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Generar tabla y calcular suma</h1>
+
+  <form id="formCantidad">
+    <label for="cantidad">¿Cuántos valores quieres?</label>
+    <input type="number" id="cantidad" min="1" value="5" required>
+    <button type="submit">Generar tabla</button>
+  </form>
+
+  <div id="contenedorTabla"></div>
+
+  <p id="resultado"></p>
+
+  <script>
+    
+    const formCantidad  = document.getElementById('formCantidad');
+    const contenedor    = document.getElementById('contenedorTabla');
+    const resultadoElem = document.getElementById('resultado');
+
+    formCantidad.addEventListener('submit', e => {
+      e.preventDefault();                // Evita recarga de página
+      resultadoElem.textContent = '';    // Limpia resultados previos
+      contenedor.innerHTML = '';         // Limpia tabla previa
+
+      const n = parseInt(document.getElementById('cantidad').value, 10);
+
+      // 2. Crear la tabla con n valores aleatorios
+      const tabla = document.createElement('table');
+      const fila  = document.createElement('tr');
+
+      for (let i = 0; i < n; i++) {
+        const celda = document.createElement('td');
+        // Valor aleatorio entre 1 y 100
+        const valor = Math.floor(Math.random() * 100) + 1;
+        celda.textContent = valor;
+        fila.appendChild(celda);
+      }
+      tabla.appendChild(fila);
+      contenedor.appendChild(tabla);
+
+      // 3. Crear botón para calcular la suma
+      const btnSuma = document.createElement('button');
+      btnSuma.textContent = 'Calcular suma';
+      btnSuma.style.display = 'block';
+      btnSuma.style.marginTop = '1em';
+
+      // Al hacer clic, sumamos las celdas
+      btnSuma.addEventListener('click', () => {
+        let suma = 0;
+        // Seleccionamos todas las celdas <td> dentro de nuestra tabla
+        const celdas = tabla.querySelectorAll('td');
+        celdas.forEach(td => {
+          suma += Number(td.textContent);
+        });
+        resultadoElem.textContent = `La suma de los ${n} valores es: ${suma}`;
+      });
+
+      contenedor.appendChild(btnSuma);
+    });
+  </script>
+</body>
+</html>
