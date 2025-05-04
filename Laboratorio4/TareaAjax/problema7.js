@@ -47,4 +47,25 @@ function drawTotalsBar(data, regiones) {
   //Averigua la última fecha    
   const sample = data.find(d => d.region === regiones[0]);
   const lastDate = sample.confirmed[sample.confirmed.length - 1].date;
+
+  //Construye la DataTable para barras
+  const dt = new google.visualization.DataTable();
+  dt.addColumn('string', 'Región');
+  dt.addColumn('number',  'Total Confirmados');
+
+  const rows = regiones.map(rg => [rg, totals[rg]]);
+  dt.addRows(rows);
+
+  //Dibuja el BarChart
+  const chart = new google.visualization.BarChart(
+    document.getElementById('chart_compare')
+  );
+  chart.draw(dt, {
+    title: `Total acumulado al ${lastDate}`,
+    hAxis: { title: 'Total Confirmados', minValue: 0 },
+    vAxis: { title: 'Región' },
+    width: 800,
+    height: regiones.length * 30 + 100,
+    legend: { position: 'none' }
+  });
 }
