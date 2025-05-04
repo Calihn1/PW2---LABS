@@ -36,4 +36,32 @@ function drawCombined(data, regiones) {
     regionMaps[rg] = m;
   });
 
+  //Montamos la DataTable
+  const dt = new google.visualization.DataTable();
+  dt.addColumn('date','Fecha');
+  //Recorremos las tres regiones para generar cada caso
+  regiones.forEach(rg => dt.addColumn('number', rg));
+
+  //Extraemos la fecha y el valor del cada region por el mapeo"
+  const rows = fechas.map(fecha => {
+    const ms = fecha.valueOf();
+    return [
+      fecha,
+      ...regiones.map(rg => regionMaps[rg].get(ms) || 0)
+    ];
+  });
+  dt.addRows(rows);
+
+  //Dibujamos el gráfico
+  const chart = new google.visualization.LineChart(
+    document.getElementById('chart_compare')
+  );
+  chart.draw(dt, {
+    title: 'Comparativo de casos',
+    hAxis: { title: 'Fecha', format: 'dd-MM-yyyy' },
+    vAxis: { title: 'Confirmados', minValue: 0 },
+    curveType: 'function',
+    width: 800,
+    height: 400
+  });
 }
