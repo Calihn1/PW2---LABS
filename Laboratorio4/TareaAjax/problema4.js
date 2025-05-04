@@ -31,4 +31,26 @@ function drawChart(data) {
     })
     //ordenar cronológicamente, diferencia en milisegundos
     .sort((a, b) => a[0] - b[0]);
+
+  //Construye la DataTable de Google
+  const dataTable = new google.visualization.DataTable();
+  dataTable.addColumn('date',   'Fecha');
+  dataTable.addColumn('number', 'Confirmados');
+  dataTable.addRows(rows);
+
+  //Opciones de estilo
+  const options = {
+    title: 'Evolución de casos en Arequipa',
+    hAxis: { title: 'Fecha', format: 'dd-MM-yyyy' },
+    vAxis: { title: 'Confirmados', minValue: 0 },
+    legend: { position: 'none' },
+    width: 800,
+    height: 400
+  };
+
+  //Dibuja el gráfico de líneas
+  const chart = new google.visualization.LineChart(
+    document.getElementById('chart_arequipa')
+  );
+  chart.draw(dataTable, options);
 }
