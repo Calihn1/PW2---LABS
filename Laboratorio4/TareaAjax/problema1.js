@@ -4,10 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(res => res.json())
       .then(data => listRegions(data))
       .catch(err => console.error('Error cargando data.json:', err));
-  });
+});
   
  
-  function listRegions(data) {
+function listRegions(data) {
     const regiones = data.map(item => item.region);
   
     const únicas = [...new Set(regiones)];
@@ -23,5 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
     const cont = document.getElementById('list-regions');
     cont.appendChild(ul);
-  }
+}
   

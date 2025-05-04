@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editor Markdown</title>
+  <style>
+    #markupText {
+      width: 100%;
+      height: 200px;
+      font-size: 16px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    #markupForm {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: auto;
+    }
+    #markupForm button {
+      margin-top: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #htmlCode {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f2f2f2;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="text-align: center;">Convertidor Markdown a HTML</h1>
+
+  <form id="markupForm">
+    <textarea id="markupText" placeholder="Escribe tu texto en Markdown aquí..."></textarea>
+    <button type="submit">Convertir</button>
+  </form>
+
+  <div id="htmlCode"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
