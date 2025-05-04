@@ -30,3 +30,21 @@ function setupUI(data) {
     drawTotalsBar(data, selected);
   };
 }
+
+function drawTotalsBar(data, regiones) {
+  //Inicializa acumulados a cero
+  const totals = {};
+  regiones.forEach(rg => totals[rg] = 0);
+
+  //Para cada región seleccionada, suma todos sus valores diarios
+  regiones.forEach(rg => {
+    const entry = data.find(d => d.region === rg);
+    entry.confirmed.forEach(item => {
+      totals[rg] += Number(item.value);
+    });
+  });
+
+  //Averigua la última fecha    
+  const sample = data.find(d => d.region === regiones[0]);
+  const lastDate = sample.confirmed[sample.confirmed.length - 1].date;
+}
