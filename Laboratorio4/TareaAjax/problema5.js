@@ -18,4 +18,22 @@ function drawCombined(data, regiones) {
       const [dd,mm,yyyy] = item.date.split('-');
       return new Date(+yyyy, +mm-1, +dd);
     });
+  
+  //Preparamos un map por región: fecha(ms) → valor
+  const regionMaps = {};
+  regiones.forEach(rg => {
+    //Consegue las tres regiones
+    const entry = data.find(d=>d.region===rg);
+    //Generamos el mapa
+    const m = new Map();
+    //La clave seran los milisegundos generado por fecha y cuerpo sera el valor de cada caso
+    entry.confirmed.forEach(item => {
+      const [dd,mm,yyyy] = item.date.split('-');
+      const ms = new Date(+yyyy, +mm-1, +dd).valueOf();
+      m.set(ms, Number(item.value));
+    });
+    //Lo guarda en un arrys cada caso de las tres regiones
+    regionMaps[rg] = m;
+  });
+
 }
