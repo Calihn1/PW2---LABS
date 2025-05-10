@@ -48,19 +48,33 @@ class Picture:
     juntos = []
 
     for linea_self, linea_p in zip(self.img, p.img):
-      juntos.appened(linea_self + linea_p)
+      juntos.append(linea_self + linea_p)
 
     return Picture(juntos)
 
   def up(self, p): 
     arriba = p.img + self.img
-    
+
     return Picture(arriba)
 
   def under(self, p):
     """ Devuelve una nueva figura poniendo la figura p sobre la
         figura actual """
-    return Picture(None)
+    
+    nuevo = []
+    
+    for l_self, l_p in zip( self.img, p.img):
+      cadena = ""
+
+      for pixel_s, pixel_p in zip(l_self, l_p):
+        if pixel_p != " ":
+          cadena += pixel_p
+        else:
+          cadena += pixel_s
+      
+      nuevo.append(cadena)
+        
+    return Picture(nuevo)
   
   def horizontalRepeat(self, n):
     """ Devuelve una nueva figura repitiendo la figura actual al costado
