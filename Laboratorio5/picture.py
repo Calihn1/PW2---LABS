@@ -21,24 +21,16 @@ class Picture:
 
   def horizontalMirror(self):
     """ Devuelve el espejo horizontal de la imagen """
-    horizontal = []
-
-    for value in self.img[::-1]:
-      horizontal.append(value)
-
-    return Picture(horizontal)
+    
+    return Picture(self.img[::-1])
 
   def negative(self):
     """ Devuelve un negativo de la imagen """
-    negativo = []
-    
-    for value in self.img:
-      cadena = ""
 
-      for pixel in value:
-        nuevo = self._invColor(pixel)
-        cadena += nuevo
-      negativo.append(cadena)
+    negativo = [
+      ''.join(self._invColor(pix) for pix in linea)
+      for linea in self.img
+    ]
 
     return Picture(negativo)
 
@@ -101,4 +93,8 @@ class Picture:
   def rotate(self):
     """Devuelve una figura rotada en 90 grados, puede ser en sentido horario
     o antihorario"""
-    return Picture(None)
+
+    flipped = self.img[::-1]
+
+    rotadas = [''.join(col) for col in zip (*flipped)]
+    return Picture(rotadas)
