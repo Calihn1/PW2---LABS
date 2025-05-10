@@ -11,6 +11,11 @@ def esEscalar(m):
                 return False
     return True
 
+def esUnitaria(m):
+  return m[0][0] == 1 and esEscalar(m)
+
+
+
 m = [
     [2, 0, 0],
     [0, 2, 0],
