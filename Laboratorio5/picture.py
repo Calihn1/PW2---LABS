@@ -88,7 +88,14 @@ class Picture:
     return Picture(nuevo)
     
   def verticalRepeat(self, n):
-    return Picture(None)
+
+    filas = []
+
+    for _ in range(n):
+      for linea in self.img :
+        filas.append(linea)
+
+    return Picture(filas)
 
   #Extra: Sólo para realmente viciosos 
   def rotate(self):
