@@ -41,5 +41,5 @@ def generarPiezas():
 
 
 tablero = generarPiezas()
-
+tablero = tablero.up(generarTablero())
 draw(tablero)
