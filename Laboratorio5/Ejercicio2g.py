@@ -33,8 +33,10 @@ def generarPeones():
 
     peon = square
     peon = peon.under(pawn)
+
     peon2 = square.negative()
     peon2 = peon2.under(pawn)
+    
     peones = peon.join(peon2)
     peones = peones.join(peones)
     peones = peones.join(peones)
@@ -42,8 +44,12 @@ def generarPeones():
     return peones
                
 
+tablero = generarPiezas()
+tablero = tablero.up(generarPeones())
 
-tablero = generarPeones().negative()
+tablero = tablero.up(generarTablero())
+
+tablero = tablero.up(generarPeones().negative())
 tablero = tablero.up(generarPiezas().negative())
 
 draw(tablero)
