@@ -11,4 +11,6 @@ for i in range(1, 8):
       tablero = tablero.join(square)
 
 tablero = tablero.up(tablero.verticalMirror())
+tablero = tablero.up(tablero)
+
 draw(tablero)
