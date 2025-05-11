@@ -10,6 +10,7 @@ def generarTablero():
     tab = tab.join(tab)
 
     tab = tab.up(tab.verticalMirror())
+    tab = tab.up(tab)
     
     return tab
 
@@ -25,7 +26,11 @@ def generarPiezas():
         else:
             casilla = square.negative()
             tab = tab.join(casilla.under(piezas[i]))
-        
+    
+    return tab
+
+def generarPeones():
+
     peon = square
     peon = peon.under(pawn)
     peon2 = square.negative()
@@ -34,12 +39,11 @@ def generarPiezas():
     peones = peones.join(peones)
     peones = peones.join(peones)
 
-    tab = tab.up(peones)
-
-    return tab 
+    return peones
                
 
 
-tablero = generarPiezas()
-tablero = tablero.up(generarTablero())
+tablero = generarPeones().negative()
+tablero = tablero.up(generarPiezas().negative())
+
 draw(tablero)
