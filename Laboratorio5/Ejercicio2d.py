@@ -3,11 +3,8 @@ from chessPictures import *
 from picture import *
 
 tablero = square
-
-for i in range(1, 8):
-   if i % 2 == 0:
-      tablero = tablero.join(square) 
-   else:
-      tablero = tablero.join(square.negative())
+tablero = tablero.join(square.negative())
+tablero = tablero.join(tablero)
+tablero = tablero.join(tablero)
 
 draw(tablero)
