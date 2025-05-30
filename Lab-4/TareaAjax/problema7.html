@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparativo de Regiones (Totales)</title>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="problema7.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    #controls {
+      margin-bottom: 20px;
+    }
+    #regionSelect {
+      width: 100%;
+      height: 150px;
+    }
+    #btnCompare {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+    }
+    #chart_compare {
+      margin-top: 30px;
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Comparativo de Totales Acumulados</h1>
+  <div id="controls">
+    <label for="regionSelect">Selecciona una o más regiones:</label><br>
+    <select id="regionSelect" multiple></select><br>
+    <button id="btnCompare">Generar Gráfico</button>
+  </div>
+  <div id="chart_compare"></div>
+</body>
+</html>
