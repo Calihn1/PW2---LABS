@@ -1,0 +1,293 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Travello</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Travello template project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
+
+<style>
+    .simplified-header .navbar-nav {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .simplified-header .nav-item {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .simplified-header .nav-link {
+        color: #fff;
+        padding: 0.75rem 1rem;
+        text-transform: uppercase;
+        font-size: 25px;
+        font-weight: 500;
+    }
+    .simplified-header .nav-link:hover {
+        color: #ccc;
+    }
+    .simplified-header .navbar-collapse .navbar-nav {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .home {
+        height: 90vh;
+    }
+    .home_slider_content_container {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .simple-footer {
+        background-color: #222227;
+        color: #7f7f8a;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 50px;
+    }
+</style>
+
+</head>
+<body>
+<div class="super_container">
+
+<header class="header simplified-header">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<nav class="navbar navbar-expand-lg p-0">
+                    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#mainNavSimplified" aria-controls="mainNavSimplified" aria-expanded="false" aria-label="Toggle navigation" style="display:none;">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+					<div class="collapse navbar-collapse" id="mainNavSimplified">
+						<ul class="navbar-nav">
+							<li class="nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                            </li>
+                            {% if user.is_authenticated and user.email|lower|slice:"-13:" == "@admin.travel" %}
+							<li class="nav-item">
+                                <a class="nav-link" href="{% url 'DestinationList' %}">Manage Destinations</a>
+                            </li>
+                            {% endif %}
+
+							{% if user.is_authenticated %}
+							<li class="nav-item"><span class="nav-link" style="cursor:default;">Hello, {{user.first_name|default:user.username}}</span></li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+							{% else %}
+							<li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="menu">
+	<div class="menu_header d-flex flex-row align-items-center justify-content-start">
+		<div class="menu_logo"><a href="{% url 'index' %}">Travello</a></div>
+		<div class="menu_close_container ml-auto"><div class="menu_close"><div></div><div></div></div></div>
+	</div>
+	<div class="menu_content">
+		<ul>
+            <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"><a href="{% url 'index' %}">Home</a></li>
+            {% if user.is_authenticated and user.email|lower|slice:"-13:" == "@admin.travel" %}
+                <li><a href="{% url 'DestinationList' %}">Manage Destinations</a></li>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <li><a href="#" style="pointer-events: none;">Hello, {{user.first_name|default:user.username}}</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'register' %}">Register</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+             <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+		</ul>
+	</div>
+	<div class="menu_social">
+		<ul class="d-flex flex-row align-items-start justify-content-start">
+			<li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+			<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+</div>
+
+<div class="home">
+	<div class="home_slider_container">
+		<div class="owl-carousel owl-theme home_slider">
+			<div class="owl-item">
+				<div class="background_image" style="background-image:url({% static 'images/image.png' %})"></div>
+				<div class="home_slider_content_container">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div class="home_slider_content">
+									<div class="home_title"><h2>Let us take you away</h2></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="owl-item">
+				<div class="background_image" style="background-image:url({% static 'images/image.png' %})"></div>
+				<div class="home_slider_content_container">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div class="home_slider_content">
+									<div class="home_title"><h2>Discover new horizons</h2></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="owl-item">
+				<div class="background_image" style="background-image:url({% static 'images/image.png' %})"></div>
+				<div class="home_slider_content_container">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<div class="home_slider_content">
+									<div class="home_title"><h2>Your adventure starts here</h2></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="intro">
+	<div class="intro_background" style="background-image:url({% static 'images/intro.png' %})"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="intro_container">
+					<div class="row">
+						<div class="col-lg-4 intro_col">
+							<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+								<div class="intro_icon"><img src="{% static 'images/beach.svg' %}" alt=""></div>
+								<div class="intro_content">
+									<div class="intro_title">Top Destinations</div>
+									<div class="intro_subtitle"><p>Explore the world's best places.</p></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 intro_col">
+							<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+								<div class="intro_icon"><img src="{% static 'images/wallet.svg' %}" alt=""></div>
+								<div class="intro_content">
+									<div class="intro_title">The Best Prices</div>
+									<div class="intro_subtitle"><p>Affordable travel packages.</p></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-4 intro_col">
+							<div class="intro_item d-flex flex-row align-items-end justify-content-start">
+								<div class="intro_icon"><img src="{% static 'images/suitcase.svg' %}" alt=""></div>
+								<div class="intro_content">
+									<div class="intro_title">Amazing Services</div>
+									<div class="intro_subtitle"><p>Customer satisfaction guaranteed.</p></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="destinations" id="destinations">
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<div class="section_subtitle">simply amazing places</div>
+				<div class="section_title"><h2>Popular Destinations</h2></div>
+			</div>
+		</div>
+		<div class="row destinations_row">
+			<div class="col">
+				<div class="destinations_container item_grid">
+					{% for dest in dests %}
+					<div class="destination item">
+						<div class="destination_image">
+                            {% if dest.imagenCiudad %}
+							    <img src="{{ dest.imagenCiudad.url }}" alt="{{ dest.nombreCiudad }}">
+                            {% else %}
+                                <img src="{% static 'images/default_destination.jpg' %}" alt="Default image">
+                            {% endif %}
+							{% if dest.ofertaTour %}
+							<div class="spec_offer text-center"><a href="#">Special Offer</a></div>
+							{% endif %}
+						</div>
+						<div class="destination_content">
+							<div class="destination_title"><a href="#">{{ dest.nombreCiudad }}</a></div>
+							<div class="destination_subtitle"><p>{{ dest.descripcionCiudad|truncatewords:15 }}</p></div>
+							<div class="destination_price">From ${{ dest.precioTour }}</div>
+						</div>
+					</div>
+					{% empty %}
+                    <div class="col-12 text-center">
+                        <p>No destinations available at the moment. Check back soon!</p>
+                    </div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer class="simple-footer">
+    <p>© {% now "Y" %} Travello. All rights reserved.</p>
+</footer>
+
+</div>
+
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/scrollTo/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>

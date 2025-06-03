@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Gestión de Destinos - Travello Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2"><i class="fas fa-map-marked-alt me-2"></i>Gestión de Destinos Turísticos</h1>
+    <a href="{% url 'DestinationCreate' %}" class="btn btn-success shadow-sm">
+        <i class="fas fa-plus-circle me-2"></i> Agregar Nuevo Destino
+    </a>
+</div>
+
+<div class="card shadow-lg border-0">
+    <div class="card-header bg-light border-bottom-0">
+        <h5 class="mb-0" style="color: #000">Listado de Destinos</h5>
+    </div>
+    <div class="card-body">
+        {% if objectList %}
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Nombre Ciudad</th>
+                        <th scope="col">Descripción Breve</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col" class="text-center">Oferta</th>
+                        <th scope="col" class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for instance in objectList %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            {% if instance.imagenCiudad %}
+                                <img src="{{ instance.imagenCiudad.url }}" alt="{{ instance.nombreCiudad }}" class="img-thumbnail" style="width: 100px; height: 75px; object-fit: cover;">
+                            {% else %}
+                                <div class="text-center text-muted" style="width: 100px; height: 75px; background-color: #e9ecef; display: flex; align-items: center; justify-content: center; border-radius: .25rem;">
+                                    <i class="fas fa-image fa-2x"></i>
+                                </div>
+                            {% endif %}
+                        </td>
+                        <td><strong>{{ instance.nombreCiudad }}</strong></td>
+                        <td>{{ instance.descripcionCiudad|truncatewords:10 }}</td>
+                        <td>${{ instance.precioTour|floatformat:2 }}</td>
+                        <td class="text-center">
+                            {% if instance.ofertaTour %}
+                                <span class="badge bg-success rounded-pill px-3 py-2"><i class="fas fa-check-circle me-1"></i> Sí</span>
+                            {% else %}
+                                <span class="badge bg-secondary rounded-pill px-3 py-2"><i class="fas fa-times-circle me-1"></i> No</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <div class="btn-group" role="group" aria-label="Destination Actions">
+                                <form method='POST' class="d-inline"> 
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value='{{ instance.id }}'/>
+                                    <button type='submit' name='modificar' value='Modificar' class='btn btn-sm btn-outline-warning me-1' title="Modificar {{ instance.nombreCiudad }}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </form>
+                                <form method='POST' class="d-inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="id" value='{{ instance.id }}'/>
+                                    <button type='submit' name='eliminar' value='Eliminar' class='btn btn-sm btn-outline-danger' title="Eliminar {{ instance.nombreCiudad }}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                <p class="lead text-muted">No hay destinos registrados actualmente.</p>
+                <p>Comienza <a href="{% url 'DestinationCreate' %}">agregando un nuevo destino</a>.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

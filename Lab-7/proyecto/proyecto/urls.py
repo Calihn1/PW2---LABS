@@ -14,13 +14,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# proyecto/urls.py
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-
+from django.conf.urls.static import static
+from destino import views as destino_views 
 
 urlpatterns = [
-    path('', include('destino.urls')),
+    path('', destino_views.index, name="index"), # Root URL points to index
+    path('destinos/', include('destino.urls')),  # URLs for the 'destino' app
     path('admin/', admin.site.urls),
-    path('accounts/',include('accounts.urls'))
+    path('accounts/', include('accounts.urls')), # URLs for the 'accounts' app
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

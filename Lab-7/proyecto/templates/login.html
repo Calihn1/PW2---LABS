@@ -1,0 +1,35 @@
+{% extends 'baseUser.html' %}
+
+{% block title %}Iniciar Sesión - TRAVEL TRIP{% endblock %}
+{% block heading %}Bienvenido de Nuevo{% endblock %} 
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5 col-xl-4"> 
+        
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="username" class="form-label visually-hidden">Nombre de usuario</label>
+                {# Default form-control size #}
+                <input type="text" name="username" id="username" class="form-control" placeholder="Nombre de usuario" required autofocus>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label visually-hidden">Contraseña</label>
+                {# Default form-control size #}
+                <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
+            </div>
+            {# Default button size #}
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+            </button>
+        </form>
+        <div class="text-center mt-3 extra-links"> 
+            <p class="mb-1">
+                ¿No tienes una cuenta? <a href="{% url 'register' %}">Regístrate aquí</a>
+            </p>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
