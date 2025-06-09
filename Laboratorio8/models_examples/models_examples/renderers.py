@@ -1,13 +1,13 @@
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
-from weasyprint import HTML
+from xhtml2pdf import pisa
 
 def render_to_pdf(template_src, context_dict={}):
     template = get_template(template_src)
-    html_string = template.render(context_dict)
-
-    pdf_file = BytesIO()
-    HTML(string=html_string).write_pdf(target=pdf_file)
-
-    return HttpResponse(pdf_file.getvalue(), content_type='application/pdf')
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if pdf.err:
+        return HttpResponse("Invalid PDF", status=400, content_type='text/plain')
+    return HttpResponse(result.getvalue(), content_type='application/pdf')
