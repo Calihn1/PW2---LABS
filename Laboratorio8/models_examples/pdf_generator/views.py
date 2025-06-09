@@ -11,7 +11,7 @@ def pdf_view(request):
         'date':    datetime.date.today().strftime('%Y-%m-%d'),
         'pdf_title':     'Invoice #1233434',
     }
-    response = render_to_pdf('pdfs/invoice.html', data)
+    response = render_to_pdf('pdf_generator/invoice.html', data)
     if response.status_code == 400:
         raise Http404("Invoice not found")
 
