@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { QuestionService } from '../question-service';
 
 @Component({
   standalone: true,
@@ -7,4 +8,9 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './results.html',
 })
-export class ResultsComponent {}
+export class ResultsComponent {
+  private questionService = inject(QuestionService);
+
+  score = this.questionService.getScore();
+  total = this.questionService.getTotal();
+}
