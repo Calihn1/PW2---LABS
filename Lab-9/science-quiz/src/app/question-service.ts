@@ -19,10 +19,25 @@ export class QuestionService {
 
   ];
 
-  
+  private results: boolean[] = []; // true = acertada, false = errada
 
-  
-  getQuestions() {
-    return this.questions;
-  }
+    getQuestions() {
+      return this.questions;
+    }
+
+    resetResults() {
+      this.results = [];
+    }
+
+    registerResult(correct: boolean) {
+      this.results.push(correct);
+    }
+
+    getScore(): number {
+      return this.results.filter(r => r).length;
+    }
+
+    getTotal(): number {
+      return this.questions.length;
+    }
 }
