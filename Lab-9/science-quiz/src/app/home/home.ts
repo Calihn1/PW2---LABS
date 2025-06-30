@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrls: ['./home.css'] 
 })
-export class Home {
+export class HomeComponent {
+  constructor(private router: Router) {}
 
+  iniciarQuiz() {
+    this.router.navigate(['/question', 1]);
+  }
 }
+
