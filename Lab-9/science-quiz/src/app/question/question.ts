@@ -18,20 +18,32 @@ export class Question {
   questionIndex = 0;
   question: any;
   feedback = '';
+  hasAnswered = false;
+  wasCorrect = false;
 
   constructor() {
     this.route.paramMap.subscribe((params) => {
       this.questionIndex = Number(params.get('id'));
       this.question = this.questionService.getQuestions()[this.questionIndex];
       this.feedback = ''; 
+      this.hasAnswered = false;
+      this.wasCorrect = false;
     });
   }
 
   select(option: string) {
-    this.feedback = option === this.question.correctAnswer ? '✅ Correcto' : '❌ Incorrecto';
+    if (this.hasAnswered) return;
+
+    this.hasAnswered = true;
+    const isCorrect = option === this.question.correctAnswer;
+    this.wasCorrect = isCorrect;
+    this.feedback = isCorrect ? '✅ Correcto' : '❌ Incorrecto';
   }
 
   next() {
+    //Si no respondio o la respuesta es incorrecta
+     this.questionService.registerResult(this.wasCorrect && this.hasAnswered);
+
     const nextIndex = this.questionIndex + 1;
     if (nextIndex < this.questionService.getQuestions().length) {
       this.router.navigate(['/question', nextIndex]);
