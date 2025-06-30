@@ -1,1 +1,11 @@
-<p>question works!</p>
+<div class="question-container">
+  <h2 class="question-title">{{ question.question }}</h2>
+
+  <div *ngFor="let opt of question.options">
+    <button class="option-button" (click)="select(opt)">{{ opt }}</button>
+  </div>
+
+  <p class="feedback">{{ feedback }}</p>
+
+  <button class="next-button" (click)="next()">Siguiente</button>
+</div>
