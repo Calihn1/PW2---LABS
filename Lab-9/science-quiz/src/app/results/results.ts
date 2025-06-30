@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
+  standalone: true,
   selector: 'app-results',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './results.html',
-  styleUrl: './results.css'
 })
-export class Results {
-
-}
+export class ResultsComponent {}
